@@ -1,6 +1,6 @@
 FROM alpine:3.12.0
 
-RUN apk add git python3 openssh g++ make openssl linux-headers
+RUN apk add git python3 openssh g++ make openssl linux-headers python2
 
 # RUN mkdir ~/.ssh
 
@@ -12,6 +12,10 @@ RUN apk add git python3 openssh g++ make openssl linux-headers
 
 RUN git clone https://github.com/nodejs/node.git 
 
-RUN cd node && ./configure
+RUN cd node && git fetch --all --tags
+
+RUN cd node && git checkout tags/v12.18.4 -b build
+
+RUN cd node && ./configure --fully-static
 
 RUN cd node && make -j4
