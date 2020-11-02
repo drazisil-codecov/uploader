@@ -6,3 +6,4 @@ codecov:
 ignore:
   - "src/ci_providers/provider_template.js"
   - "test/**/*"
+
